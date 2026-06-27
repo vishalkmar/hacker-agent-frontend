@@ -1,0 +1,79 @@
+/* highlight.js theme (github light) for fenced code blocks — must precede @tailwind */
+@import 'highlight.js/styles/github.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #F8FAFC;
+  color: #0F172A;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Thin custom scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #CBD5E1 transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 8px;
+}
+
+/* Markdown content styling for chat messages */
+.md :where(p, ul, ol, pre, blockquote, table, h1, h2, h3, h4):not(:last-child) {
+  margin-bottom: 0.75rem;
+}
+.md h1 { font-size: 1.35rem; font-weight: 700; }
+.md h2 { font-size: 1.2rem; font-weight: 700; }
+.md h3 { font-size: 1.05rem; font-weight: 600; }
+.md ul { list-style: disc; padding-left: 1.4rem; }
+.md ol { list-style: decimal; padding-left: 1.4rem; }
+.md a { color: #2563EB; text-decoration: underline; }
+.md code:not(pre code) {
+  background: #F1F5F9;
+  color: #0F172A;
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.3rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.85em;
+}
+.md pre {
+  background: #F8FAFC !important;
+  border: 1px solid #E2E8F0;
+  border-radius: 0.6rem;
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+  font-size: 0.85rem;
+}
+.md pre code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  background: transparent !important;
+}
+.md table { border-collapse: collapse; width: 100%; }
+.md th, .md td { border: 1px solid #E2E8F0; padding: 0.4rem 0.6rem; text-align: left; }
+.md blockquote { border-left: 3px solid #CBD5E1; padding-left: 0.8rem; color: #64748B; }
+
+/* Streaming caret (no blink — clean) */
+.caret::after {
+  content: '▍';
+  margin-left: 1px;
+  color: #2563EB;
+}

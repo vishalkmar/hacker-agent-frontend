@@ -1,0 +1,30 @@
+# dependencies
+node_modules/
+
+# env / secrets
+.env
+*.env
+!*.env.example
+
+# database & data
+backend/data/
+backend/workspace/
+backend/uploads/
+*.db
+*.db-wal
+*.db-shm
+
+# build output
+frontend/dist/
+dist/
+build/
+
+# logs
+*.log
+npm-debug.log*
+
+# editor / os
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
