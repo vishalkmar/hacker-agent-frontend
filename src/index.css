@@ -1,12 +1,12 @@
-/* highlight.js theme (github light) for fenced code blocks — must precede @tailwind */
-@import 'highlight.js/styles/github.css';
+/* highlight.js theme (github-dark) for fenced code blocks — must precede @tailwind */
+@import 'highlight.js/styles/github-dark.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 html,
@@ -17,24 +17,35 @@ body,
 
 body {
   margin: 0;
-  background: #F8FAFC;
-  color: #0F172A;
+  background: #070b12;
+  color: #e3edf7;
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  /* Subtle HUD grid + radial glow for the Jarvis feel */
+  background-image:
+    radial-gradient(1200px 600px at 80% -10%, rgba(34, 211, 238, 0.06), transparent 60%),
+    radial-gradient(900px 500px at 0% 110%, rgba(59, 130, 246, 0.05), transparent 60%),
+    linear-gradient(rgba(34, 211, 238, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 44px 44px, 44px 44px;
+  background-attachment: fixed;
 }
 
 /* Thin custom scrollbars */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #CBD5E1 transparent;
+  scrollbar-color: #1f3147 transparent;
 }
 *::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 *::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #1f3147;
   border-radius: 8px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #2b4a68;
 }
 
 /* Markdown content styling for chat messages */
@@ -46,18 +57,18 @@ body {
 .md h3 { font-size: 1.05rem; font-weight: 600; }
 .md ul { list-style: disc; padding-left: 1.4rem; }
 .md ol { list-style: decimal; padding-left: 1.4rem; }
-.md a { color: #2563EB; text-decoration: underline; }
+.md a { color: #22d3ee; text-decoration: underline; }
 .md code:not(pre code) {
-  background: #F1F5F9;
-  color: #0F172A;
+  background: #0f1a28;
+  color: #7fe7f5;
   padding: 0.1rem 0.35rem;
   border-radius: 0.3rem;
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
   font-size: 0.85em;
 }
 .md pre {
-  background: #F8FAFC !important;
-  border: 1px solid #E2E8F0;
+  background: #060a11 !important;
+  border: 1px solid #162234;
   border-radius: 0.6rem;
   padding: 0.9rem 1rem;
   overflow-x: auto;
@@ -68,12 +79,15 @@ body {
   background: transparent !important;
 }
 .md table { border-collapse: collapse; width: 100%; }
-.md th, .md td { border: 1px solid #E2E8F0; padding: 0.4rem 0.6rem; text-align: left; }
-.md blockquote { border-left: 3px solid #CBD5E1; padding-left: 0.8rem; color: #64748B; }
+.md th, .md td { border: 1px solid #162234; padding: 0.4rem 0.6rem; text-align: left; }
+.md blockquote { border-left: 3px solid #22d3ee; padding-left: 0.8rem; color: #90a4bd; }
 
-/* Streaming caret (no blink — clean) */
+/* Streaming caret — glowing cyan */
 .caret::after {
   content: '▍';
   margin-left: 1px;
-  color: #2563EB;
+  color: #22d3ee;
+  text-shadow: 0 0 8px rgba(34, 211, 238, 0.8);
+  animation: blink 1.05s steps(1) infinite;
 }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }

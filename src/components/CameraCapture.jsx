@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '../ui/index.jsx';
+import { Camera, X } from 'lucide-react';
 
 // Live camera capture modal. Calls onCapture(File) with a JPEG snapshot.
 export default function CameraCapture({ onCapture, onClose }) {
@@ -54,8 +55,8 @@ export default function CameraCapture({ onCapture, onClose }) {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm" onClick={onClose}>
       <div className="bg-bg-secondary border border-line rounded-2xl p-4 shadow-lift w-[min(92vw,640px)]" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between mb-3">
-          <h3 className="font-semibold text-txt-primary">📷 Camera</h3>
-          <button onClick={onClose} className="text-txt-muted hover:text-accent-red text-sm">✕</button>
+          <h3 className="font-semibold text-txt-primary flex items-center gap-2"><Camera size={17} className="text-primary" /> Camera</h3>
+          <button onClick={onClose} className="text-txt-muted hover:text-accent-red"><X size={18} /></button>
         </div>
         {err ? (
           <div className="text-sm text-accent-red py-10 text-center">{err}</div>
@@ -64,7 +65,7 @@ export default function CameraCapture({ onCapture, onClose }) {
         )}
         <div className="flex justify-center gap-3 mt-4">
           <Button variant="outline" onClick={onClose}>Cancel</Button>
-          <Button onClick={snap} disabled={!!err}>📸 Capture</Button>
+          <Button onClick={snap} disabled={!!err}><Camera size={15} /> Capture</Button>
         </div>
       </div>
     </div>

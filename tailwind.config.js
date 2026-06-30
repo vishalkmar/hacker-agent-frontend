@@ -4,43 +4,45 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Phase 10: premium LIGHT theme, primary blue (docs/PLATFORM-UPGRADE.md).
+        // Jarvis / hacker theme — deep navy-black with glowing cyan.
         bg: {
-          primary: '#F8FAFC',   // app background (slate-50)
-          secondary: '#FFFFFF', // surfaces: sidebar, cards, composer
-          tertiary: '#F1F5F9',  // inputs, hover fills (slate-100)
+          primary: '#070b12',   // app background (deep space navy-black)
+          secondary: '#0c131f', // panels, sidebar, cards
+          tertiary: '#141d2c',  // inputs, hover fills
         },
         txt: {
-          primary: '#0F172A',   // slate-900
-          secondary: '#475569', // slate-600
-          muted: '#64748B',     // slate-500
+          primary: '#e3edf7',   // soft blue-white
+          secondary: '#90a4bd', // dim
+          muted: '#5d7188',     // muted
         },
-        // Brand primary (blue) — use `primary` for CTAs/focus going forward.
+        // Brand primary = Jarvis cyan glow.
         primary: {
-          DEFAULT: '#2563EB',
-          hover: '#1D4ED8',
-          tint: '#EFF6FF',
-          ring: '#93C5FD',
+          DEFAULT: '#22d3ee',
+          hover: '#38e0f5',
+          tint: 'rgba(34,211,238,0.12)',
+          ring: 'rgba(34,211,238,0.45)',
         },
         accent: {
-          green: '#16A34A',
-          red: '#DC2626',
-          orange: '#D97706',
-          yellow: '#CA8A04',
-          blue: '#2563EB',
-          purple: '#7C3AED',
-          cyan: '#2563EB', // mapped to brand blue so existing CTAs read as primary
+          green: '#22c55e',
+          red: '#f43f5e',
+          orange: '#f59e0b',
+          yellow: '#eab308',
+          blue: '#3b82f6',
+          purple: '#a855f7',
+          cyan: '#22d3ee',
         },
-        terminal: '#15803D',
-        line: '#E2E8F0',        // slate-200 borders
+        terminal: '#22ff9e',     // matrix green for the console
+        line: '#1b2a3e',         // subtle blue-grey border
       },
       fontFamily: {
         mono: ['JetBrains Mono', 'Fira Code', 'ui-monospace', 'monospace'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        soft: '0 1px 3px rgba(15,23,42,0.08), 0 1px 2px rgba(15,23,42,0.04)',
-        lift: '0 4px 16px rgba(15,23,42,0.10)',
+        soft: '0 2px 8px rgba(0,0,0,0.45)',
+        lift: '0 8px 28px rgba(0,0,0,0.55)',
+        glow: '0 0 0 1px rgba(34,211,238,0.25), 0 0 22px rgba(34,211,238,0.14)',
+        'glow-strong': '0 0 0 1px rgba(34,211,238,0.45), 0 0 30px rgba(34,211,238,0.30)',
       },
     },
   },

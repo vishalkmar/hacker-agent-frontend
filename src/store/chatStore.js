@@ -14,12 +14,15 @@ export const useChat = create((set, get) => ({
   showTerminal: false,
   showSearch: false,
   showFindings: false,
+  showBrowser: false,
+  browserView: { url: null, screenshot: null },
   findings: [],
   findingStats: null,
   abortStream: null,
 
   toggleTerminal: () => set((s) => ({ showTerminal: !s.showTerminal })),
   toggleSearch: () => set((s) => ({ showSearch: !s.showSearch })),
+  toggleBrowser: () => set((s) => ({ showBrowser: !s.showBrowser })),
   async toggleFindings() {
     const next = !get().showFindings;
     set({ showFindings: next });
@@ -154,6 +157,9 @@ export const useChat = create((set, get) => ({
             m.content +
             `\n\`\`\`\n_exit ${data.exitCode}${data.blocked ? ' · blocked by host guard' : ''}_\n`,
         })),
+      // AI's browser navigated — update the live view panel (auto-open it).
+      onBrowser: (data) =>
+        set({ browserView: { url: data.url, screenshot: data.screenshot }, showBrowser: true }),
       onDone: (saved) => {
         updateAssistant(() => ({ id: saved.id, content: saved.content, model: saved.model }));
         set({ streaming: false, abortStream: null });

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useChat } from '../store/chatStore.js';
 import { api } from '../services/api.js';
+import { Target, FileText, X } from 'lucide-react';
 
 const SEV = {
   critical: 'text-accent-red border-accent-red/40',
@@ -106,7 +107,7 @@ export default function FindingsPanel() {
     <div className="h-80 shrink-0 flex flex-col border-t border-line bg-bg-secondary">
       <div className="flex items-center justify-between px-3 py-2 border-b border-line">
         <div className="flex items-center gap-3 text-xs">
-          <span className="text-accent-cyan font-mono">🎯 Findings ({s.total})</span>
+          <span className="text-primary font-mono inline-flex items-center gap-1.5"><Target size={14} /> Findings ({s.total})</span>
           {s.critical > 0 && <span className="text-accent-red">crit {s.critical}</span>}
           {s.high > 0 && <span className="text-accent-orange">high {s.high}</span>}
           {s.medium > 0 && <span className="text-accent-yellow">med {s.medium}</span>}
@@ -117,12 +118,12 @@ export default function FindingsPanel() {
           <button
             onClick={genReport}
             disabled={reporting}
-            className="text-xs px-2 py-0.5 rounded bg-accent-purple/20 text-accent-purple border border-accent-purple/30 disabled:opacity-50"
+            className="text-xs px-2 py-0.5 rounded bg-accent-purple/20 text-accent-purple border border-accent-purple/30 disabled:opacity-50 inline-flex items-center gap-1"
           >
-            {reporting ? 'generating…' : '📄 Report'}
+            <FileText size={13} /> {reporting ? 'generating…' : 'Report'}
           </button>
           <button onClick={loadFindings} className="text-xs text-txt-muted hover:text-txt-primary">refresh</button>
-          <button onClick={toggleFindings} className="text-xs text-txt-muted hover:text-accent-red">✕</button>
+          <button onClick={toggleFindings} className="text-xs text-txt-muted hover:text-accent-red"><X size={15} /></button>
         </div>
       </div>
 

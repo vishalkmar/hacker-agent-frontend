@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useChat } from '../store/chatStore.js';
 import { useAuth } from '../store/authStore.js';
+import { Plus, Wrench, ShieldHalf, Zap, LogOut, Pencil, Trash2, Check, X } from 'lucide-react';
+import { Logo } from '../ui/index.jsx';
 
 function SessionItem({ session, active, onSelect, onRename, onDelete }) {
   const [editing, setEditing] = useState(false);
@@ -69,20 +71,20 @@ export default function Sidebar() {
   return (
     <aside className="w-72 shrink-0 h-full flex flex-col bg-bg-secondary border-r border-line">
       <div className="p-3 border-b border-line">
-        <div className="flex items-center gap-2 px-1 pb-3">
-          <span className="text-xl">🛡️</span>
+        <div className="flex items-center gap-2.5 px-1 pb-3">
+          <Logo size={34} />
           <div>
-            <div className="font-semibold text-txt-primary leading-tight">CypherMind AI</div>
-            <div className="text-[10px] text-txt-muted">Security copilot · Phase 1</div>
+            <div className="font-semibold text-txt-primary leading-tight tracking-wide">CypherMind AI</div>
+            <div className="text-[10px] text-txt-muted">Autonomous security copilot</div>
           </div>
         </div>
         <button
           onClick={newChat}
           className="w-full flex items-center justify-center gap-2 py-2 rounded-lg
-            bg-accent-cyan/15 text-accent-cyan border border-accent-cyan/30
-            hover:bg-accent-cyan/25 transition text-sm font-medium"
+            bg-primary/12 text-primary border border-primary/30
+            hover:bg-primary/20 hover:shadow-glow transition text-sm font-medium"
         >
-          + New chat
+          <Plus size={16} /> New chat
         </button>
       </div>
 
@@ -105,23 +107,23 @@ export default function Sidebar() {
       <div className="p-3 border-t border-line space-y-2">
         <button
           onClick={openTools}
-          className="w-full flex items-center justify-center gap-2 py-1.5 rounded-lg bg-bg-tertiary border border-line text-txt-primary text-xs font-semibold hover:border-primary/50 transition"
+          className="w-full flex items-center justify-center gap-2 py-1.5 rounded-lg bg-bg-tertiary border border-line text-txt-primary text-xs font-semibold hover:border-primary/50 hover:text-primary transition"
         >
-          🧰 Tool Intelligence
+          <Wrench size={14} /> Tool Intelligence
         </button>
         {user?.is_admin && (
           <button
             onClick={openAdmin}
-            className="w-full flex items-center justify-center gap-2 py-1.5 rounded-lg bg-bg-tertiary border border-line text-txt-primary text-xs font-semibold hover:border-primary/50 transition"
+            className="w-full flex items-center justify-center gap-2 py-1.5 rounded-lg bg-bg-tertiary border border-line text-txt-primary text-xs font-semibold hover:border-primary/50 hover:text-primary transition"
           >
-            🛡️ Admin Panel
+            <ShieldHalf size={14} /> Admin Panel
           </button>
         )}
         <button
           onClick={openPricing}
-          className="w-full flex items-center justify-center gap-2 py-1.5 rounded-lg bg-gradient-to-r from-primary to-blue-400 text-white text-xs font-semibold shadow-soft hover:opacity-95 transition"
+          className="w-full flex items-center justify-center gap-2 py-1.5 rounded-lg bg-primary text-bg-primary text-xs font-bold shadow-glow hover:bg-primary-hover transition"
         >
-          ⚡ Upgrade plan
+          <Zap size={14} /> Upgrade plan
         </button>
         {user ? (
           <button onClick={openDashboard} className="w-full flex items-center justify-between gap-2 group">

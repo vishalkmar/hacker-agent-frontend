@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../services/api.js';
 import { useAuth } from '../store/authStore.js';
 import { Card, Badge, Button, Input, Spinner } from '../ui/index.jsx';
+import { ShieldHalf, X } from 'lucide-react';
 
 const fmtDate = (d) => (d ? new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: '2-digit' }) : '—');
 const TXN_COLOR = { paid: 'green', created: 'orange', failed: 'red' };
@@ -67,13 +68,13 @@ export default function AdminPanel() {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4" onClick={closeAdmin}>
       <div className="w-full max-w-5xl bg-bg-primary border border-line rounded-2xl shadow-lift max-h-[92vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between px-6 py-4 border-b border-line sticky top-0 bg-bg-primary z-10">
-          <h2 className="text-lg font-bold text-txt-primary">🛡️ Admin Panel</h2>
+          <h2 className="text-lg font-bold text-txt-primary flex items-center gap-2"><ShieldHalf size={18} className="text-primary" /> Admin Panel</h2>
           <div className="flex gap-2">
             <Tab id="dashboard" label="Dashboard" />
             <Tab id="users" label="Users" />
             <Tab id="transactions" label="Transactions" />
             <Tab id="plans" label="Plans" />
-            <button onClick={closeAdmin} className="ml-2 text-txt-muted hover:text-accent-red">✕</button>
+            <button onClick={closeAdmin} className="ml-2 text-txt-muted hover:text-accent-red"><X size={18} /></button>
           </div>
         </div>
 

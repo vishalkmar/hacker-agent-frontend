@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../services/api.js';
 import { useAuth } from '../store/authStore.js';
 import { Button, Card, Badge, Spinner, Input } from '../ui/index.jsx';
+import { Zap, X } from 'lucide-react';
 
 const fmtDate = (d) => (d ? new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '—');
 const TXN_COLOR = { paid: 'green', created: 'orange', failed: 'red' };
@@ -55,7 +56,7 @@ export default function Dashboard() {
       <div className="w-full max-w-3xl bg-bg-primary border border-line rounded-2xl shadow-lift max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between px-6 py-4 border-b border-line">
           <h2 className="text-lg font-bold text-txt-primary">My Account</h2>
-          <button onClick={closeDashboard} className="text-txt-muted hover:text-accent-red">✕</button>
+          <button onClick={closeDashboard} className="text-txt-muted hover:text-accent-red"><X size={18} /></button>
         </div>
         <div className="flex gap-2 px-6 pt-4">
           <Tab id="overview" label="Overview" />
@@ -75,7 +76,7 @@ export default function Dashboard() {
                   <Badge color="blue">{billing?.plan?.period || 'free'}</Badge>
                 </div>
                 {daysLeft !== null && <div className="text-sm text-txt-secondary mt-1">{daysLeft} days left · renews {fmtDate(billing?.subscription?.expires_at)}</div>}
-                <Button className="mt-4" size="sm" onClick={() => { closeDashboard(); openPricing(); }}>⚡ Upgrade</Button>
+                <Button className="mt-4" size="sm" onClick={() => { closeDashboard(); openPricing(); }}><Zap size={14} /> Upgrade</Button>
               </Card>
               <Card className="p-5">
                 <div className="text-xs text-txt-muted uppercase">Usage today</div>

@@ -164,6 +164,7 @@ export const api = {
             else if (event === 'command') handlers.onCommand?.(data.command);
             else if (event === 'output') handlers.onOutput?.(data);
             else if (event === 'command_result') handlers.onCommandResult?.(data);
+            else if (event === 'browser') handlers.onBrowser?.(data);
             else if (event === 'done') handlers.onDone?.(data.message);
             else if (event === 'error') handlers.onError?.(new Error(data.error));
           }

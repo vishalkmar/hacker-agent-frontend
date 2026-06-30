@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../services/api.js';
 import { useAuth } from '../store/authStore.js';
 import { Button, Card, Badge, Input, Spinner } from '../ui/index.jsx';
+import { Wrench, X } from 'lucide-react';
 
 const STATUS_COLOR = { works: 'green', partial: 'orange', broken: 'red', untested: 'gray' };
 
@@ -39,8 +40,8 @@ export default function ToolsPanel() {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm p-4" onClick={closeTools}>
       <div className="w-full max-w-3xl bg-bg-primary border border-line rounded-2xl shadow-lift max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between px-6 py-4 border-b border-line">
-          <h2 className="text-lg font-bold text-txt-primary">🧰 Kali Tool Intelligence</h2>
-          <button onClick={closeTools} className="text-txt-muted hover:text-accent-red">✕</button>
+          <h2 className="text-lg font-bold text-txt-primary flex items-center gap-2"><Wrench size={18} className="text-primary" /> Kali Tool Intelligence</h2>
+          <button onClick={closeTools} className="text-txt-muted hover:text-accent-red"><X size={18} /></button>
         </div>
 
         <div className="p-6 space-y-4">

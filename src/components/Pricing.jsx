@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../services/api.js';
 import { useAuth } from '../store/authStore.js';
 import { Button, Card, Badge, Spinner } from '../ui/index.jsx';
+import { X } from 'lucide-react';
 
 // Lazy-load the Cashfree v3 SDK.
 function loadCashfree() {
@@ -69,7 +70,7 @@ export default function Pricing() {
       <div className="w-full max-w-4xl bg-bg-primary border border-line rounded-2xl p-6 shadow-lift max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between mb-1">
           <h2 className="text-xl font-bold text-txt-primary">Upgrade your plan</h2>
-          <button onClick={closePricing} className="text-txt-muted hover:text-accent-red">✕</button>
+          <button onClick={closePricing} className="text-txt-muted hover:text-accent-red"><X size={18} /></button>
         </div>
         <p className="text-sm text-txt-muted mb-5">Choose a plan that fits. Billed monthly · cancel anytime.</p>
 

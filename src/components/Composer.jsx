@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useChat } from '../store/chatStore.js';
 import { api } from '../services/api.js';
 import CameraCapture from './CameraCapture.jsx';
+import { Plus, Camera, Image as ImageIcon, FileText, Paperclip, Send, Square, Bot, X, TriangleAlert } from 'lucide-react';
 
 const IMAGE_ACCEPT = 'image/*';
 const DOC_ACCEPT =
@@ -91,12 +92,12 @@ export default function Composer() {
     }
   };
 
-  const MenuItem = ({ icon, label, onClick }) => (
+  const MenuItem = ({ icon: Icon, label, onClick }) => (
     <button
       onClick={() => { setMenuOpen(false); onClick(); }}
-      className="flex items-center gap-3 w-full px-3 py-2 text-sm text-txt-secondary hover:bg-bg-tertiary hover:text-txt-primary rounded-lg transition"
+      className="flex items-center gap-3 w-full px-3 py-2 text-sm text-txt-secondary hover:bg-bg-tertiary hover:text-primary rounded-lg transition"
     >
-      <span className="text-base">{icon}</span> {label}
+      <Icon size={16} /> {label}
     </button>
   );
 
@@ -111,15 +112,17 @@ export default function Composer() {
                 key={a.id}
                 className="flex items-center gap-2 text-xs bg-bg-secondary border border-line rounded-lg px-2 py-1 text-txt-secondary shadow-soft"
               >
-                {a.kind === 'image' ? '🖼️' : a.kind === 'pdf' ? '📄' : '📎'} {a.name}
+                {a.kind === 'image' ? <ImageIcon size={13} /> : a.kind === 'pdf' ? <FileText size={13} /> : <Paperclip size={13} />} {a.name}
                 <span className="text-txt-muted">· {a.kind}</span>
                 {a.meta?.secrets?.length > 0 && (
-                  <span className="text-accent-orange" title="secrets detected">⚠ {a.meta.secrets.length}</span>
+                  <span className="text-accent-orange inline-flex items-center gap-0.5" title="secrets detected">
+                    <TriangleAlert size={12} /> {a.meta.secrets.length}
+                  </span>
                 )}
                 <button
                   onClick={() => setAttachments((arr) => arr.filter((_, idx) => idx !== i))}
                   className="text-txt-muted hover:text-accent-red"
-                >✕</button>
+                ><X size={13} /></button>
               </span>
             ))}
           </div>
@@ -139,13 +142,13 @@ export default function Composer() {
               onClick={() => setMenuOpen((o) => !o)}
               title="Add attachment"
               disabled={uploading}
-              className="px-2 py-1.5 rounded-lg text-txt-secondary hover:text-primary hover:bg-bg-tertiary disabled:opacity-40 transition text-lg leading-none"
-            >＋</button>
+              className="p-2 rounded-lg text-txt-secondary hover:text-primary hover:bg-bg-tertiary disabled:opacity-40 transition"
+            ><Plus size={18} /></button>
             {menuOpen && (
               <div className="absolute bottom-11 left-0 w-44 bg-bg-secondary border border-line rounded-xl shadow-lift p-1 z-20">
-                <MenuItem icon="📷" label="Camera" onClick={() => setCamera(true)} />
-                <MenuItem icon="🖼️" label="Photo" onClick={() => photoRef.current?.click()} />
-                <MenuItem icon="📄" label="Document" onClick={() => docRef.current?.click()} />
+                <MenuItem icon={Camera} label="Camera" onClick={() => setCamera(true)} />
+                <MenuItem icon={ImageIcon} label="Photo" onClick={() => photoRef.current?.click()} />
+                <MenuItem icon={FileText} label="Document" onClick={() => docRef.current?.click()} />
               </div>
             )}
           </div>
@@ -165,14 +168,16 @@ export default function Composer() {
           {streaming ? (
             <button
               onClick={stop}
-              className="shrink-0 px-3 py-1.5 rounded-lg bg-accent-red/15 text-accent-red border border-accent-red/30 text-sm"
-            >■ Stop</button>
+              title="Stop"
+              className="shrink-0 p-2 rounded-lg bg-accent-red/15 text-accent-red border border-accent-red/30 hover:bg-accent-red/25 transition"
+            ><Square size={18} fill="currentColor" /></button>
           ) : (
             <button
               onClick={submit}
               disabled={(!text.trim() && attachments.length === 0) || uploading}
-              className="shrink-0 px-3 py-1.5 rounded-lg bg-primary text-white hover:bg-primary-hover disabled:opacity-40 text-sm font-medium shadow-soft transition"
-            >Send ↵</button>
+              title="Send (Enter)"
+              className="shrink-0 p-2 rounded-lg bg-primary text-bg-primary hover:bg-primary-hover disabled:opacity-30 disabled:shadow-none shadow-glow transition"
+            ><Send size={18} /></button>
           )}
         </div>
 
@@ -180,12 +185,12 @@ export default function Composer() {
           <button
             onClick={() => setAutopilot((a) => !a)}
             title="Autonomous engagement: AI runs the full kill-chain itself"
-            className={`text-[11px] px-2 py-0.5 rounded-full border transition ${
+            className={`inline-flex items-center gap-1.5 text-[11px] px-2.5 py-1 rounded-full border transition ${
               autopilot
-                ? 'bg-accent-purple/15 text-accent-purple border-accent-purple/40'
+                ? 'bg-accent-purple/15 text-accent-purple border-accent-purple/40 shadow-[0_0_14px_rgba(168,85,247,0.25)]'
                 : 'text-txt-muted border-line hover:text-txt-secondary'
             }`}
-          >🤖 Autopilot {autopilot ? 'ON' : 'OFF'}</button>
+          ><Bot size={13} /> Autopilot {autopilot ? 'ON' : 'OFF'}</button>
           <span className="text-[10px] text-txt-muted">
             Camera, photos &amp; documents — drag, paste, or use ＋. AI reads &amp; remembers them.
           </span>

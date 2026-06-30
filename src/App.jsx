@@ -3,22 +3,20 @@ import { useChat } from './store/chatStore.js';
 import { useAuth } from './store/authStore.js';
 import Sidebar from './components/Sidebar.jsx';
 import ChatPane from './components/ChatPane.jsx';
-import Terminal from './components/Terminal.jsx';
-import SearchPanel from './components/SearchPanel.jsx';
 import FindingsPanel from './components/FindingsPanel.jsx';
 import AuthModal from './components/AuthModal.jsx';
 import Pricing from './components/Pricing.jsx';
+import { Target } from 'lucide-react';
 import Dashboard from './components/Dashboard.jsx';
 import AdminPanel from './components/AdminPanel.jsx';
 import ToolsPanel from './components/ToolsPanel.jsx';
+import BrowserPanel from './components/BrowserPanel.jsx';
 
 export default function App() {
   const {
     init, error, clearError,
-    showTerminal, toggleTerminal,
-    showSearch, toggleSearch,
     showFindings, toggleFindings,
-    execInfo,
+    showBrowser,
   } = useChat();
   const loadAuth = useAuth((s) => s.load);
 
@@ -37,38 +35,21 @@ export default function App() {
       <Sidebar />
       <div className="flex-1 flex flex-col min-w-0">
         <ChatPane />
+        {/* AI-driven & view-only — the AI does all searching/browsing/commands itself; the user
+            only chats and watches. The browser auto-opens when the agent navigates. */}
+        {showBrowser && <BrowserPanel />}
         {showFindings && <FindingsPanel />}
-        {showSearch && <SearchPanel />}
-        {showTerminal && <Terminal />}
       </div>
 
-      {/* Floating toggles */}
+      {/* Findings is a read-only VIEW of what the AI found — the only optional panel. */}
       <div className="fixed bottom-24 right-6 flex flex-col gap-2 items-end">
         {!showFindings && (
           <button
             onClick={toggleFindings}
-            title="Open findings"
-            className="px-3 py-2 rounded-xl bg-bg-secondary border border-line text-accent-orange text-sm shadow-soft hover:shadow-lift hover:border-accent-orange/50 transition"
+            title="View findings"
+            className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-bg-secondary border border-line text-accent-orange text-sm shadow-soft hover:shadow-lift hover:border-accent-orange/50 transition"
           >
-            🎯 Findings
-          </button>
-        )}
-        {!showSearch && (
-          <button
-            onClick={toggleSearch}
-            title="Open search"
-            className="px-3 py-2 rounded-xl bg-bg-secondary border border-line text-primary text-sm shadow-soft hover:shadow-lift hover:border-primary/50 transition"
-          >
-            🔎 Search
-          </button>
-        )}
-        {execInfo?.enabled !== false && !showTerminal && (
-          <button
-            onClick={toggleTerminal}
-            title="Open terminal"
-            className="px-3 py-2 rounded-xl bg-bg-secondary border border-line text-terminal text-sm shadow-soft hover:shadow-lift hover:border-terminal/50 transition"
-          >
-            ▣ Terminal
+            <Target size={15} /> Findings
           </button>
         )}
       </div>
